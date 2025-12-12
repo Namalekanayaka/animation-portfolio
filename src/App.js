@@ -410,7 +410,7 @@ const AnimationPortfolio = () => {
   );
 };
 
-const HomePage = ({
+const HomePage = React.memo(({
   projects,
   setSelectedProject,
   setCursorSize,
@@ -431,12 +431,12 @@ const HomePage = ({
     >
       {/* Hero with Parallax */}
       <section className="min-h-screen relative flex items-center justify-between px-8 md:px-16 py-20 overflow-hidden">
-        {/* Starry Night Background */}
+        {/* Optimized Starry Night Background */}
         <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-900/20 to-black">
-          {/* Stars Layer 1 - Far */}
-          {[...Array(100)].map((_, i) => (
+          {/* Reduced Stars - Only 20 total for performance */}
+          {[...Array(20)].map((_, i) => (
             <motion.div
-              key={`star-far-${i}`}
+              key={`star-${i}`}
               className="absolute rounded-full bg-white"
               style={{
                 width: Math.random() * 2 + 1,
@@ -456,31 +456,8 @@ const HomePage = ({
             />
           ))}
 
-          {/* Stars Layer 2 - Mid */}
-          {[...Array(50)].map((_, i) => (
-            <motion.div
-              key={`star-mid-${i}`}
-              className="absolute rounded-full bg-blue-200"
-              style={{
-                width: Math.random() * 3 + 2,
-                height: Math.random() * 3 + 2,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                opacity: [0.3, 1, 0.3],
-                y: [0, -30, 0],
-              }}
-              transition={{
-                duration: Math.random() * 4 + 3,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
-
-          {/* Shooting Stars */}
-          {[...Array(3)].map((_, i) => (
+          {/* Shooting Stars - Reduced to 2 */}
+          {[...Array(2)].map((_, i) => (
             <motion.div
               key={`shooting-${i}`}
               className="absolute h-0.5 bg-gradient-to-r from-transparent via-white to-transparent"
@@ -497,8 +474,8 @@ const HomePage = ({
               transition={{
                 duration: 2,
                 repeat: Infinity,
-                delay: i * 4,
-                repeatDelay: 8,
+                delay: i * 5,
+                repeatDelay: 10,
               }}
             />
           ))}
@@ -509,7 +486,6 @@ const HomePage = ({
             animate={{
               scale: [1, 1.3, 1],
               x: [0, 50, 0],
-              rotate: [0, 180, 360],
             }}
             transition={{ duration: 20, repeat: Infinity }}
           />
@@ -518,54 +494,12 @@ const HomePage = ({
             animate={{
               scale: [1.2, 1, 1.2],
               y: [0, -50, 0],
-              rotate: [360, 180, 0],
             }}
             transition={{ duration: 25, repeat: Infinity }}
           />
 
-          {/* Constellation Lines */}
-          <svg className="absolute inset-0 w-full h-full opacity-20">
-            <motion.path
-              d="M 100 200 L 300 150 L 250 350 L 450 300 L 400 500"
-              stroke="white"
-              strokeWidth="1"
-              fill="none"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                repeatType: "reverse",
-              }}
-            />
-            <motion.circle
-              cx="100"
-              cy="200"
-              r="3"
-              fill="white"
-              animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            <motion.circle
-              cx="300"
-              cy="150"
-              r="3"
-              fill="white"
-              animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-            />
-            <motion.circle
-              cx="250"
-              cy="350"
-              r="3"
-              fill="white"
-              animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-            />
-          </svg>
-
-          {/* Floating Particles */}
-          {[...Array(20)].map((_, i) => (
+          {/* Reduced Floating Particles - Only 8 */}
+          {[...Array(8)].map((_, i) => (
             <motion.div
               key={`particle-${i}`}
               className="absolute w-1 h-1 bg-cyan-400 rounded-full"
@@ -664,9 +598,9 @@ const HomePage = ({
           </motion.button>
         </motion.div>
 
-        {/* Profile Image Section */}
+        {/* Advanced Profile Image Section with 3D Effects */}
         <motion.div
-          className="relative w-80 h-[450px] hidden md:block"
+          className="relative w-80 h-[450px] hidden md:block perspective-1000"
           style={{ y: sculptureY }}
           initial={{ opacity: 0, scale: 0.8, x: 100 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
@@ -674,84 +608,205 @@ const HomePage = ({
         >
           <motion.div
             className="relative w-full h-full"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{
+              scale: 1.05,
+              rotateY: 5,
+              rotateX: -5,
+            }}
             animate={{
               y: [0, -15, 0],
             }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            transition={{
+              y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+              scale: { duration: 0.3 },
+              rotateY: { duration: 0.3 },
+              rotateX: { duration: 0.3 }
+            }}
+            style={{
+              transformStyle: "preserve-3d",
+            }}
           >
-            {/* Main Image Container */}
+            {/* Morphing Blob Background */}
             <motion.div
-              className="relative w-full h-full overflow-hidden"
-              style={{
-                clipPath: "polygon(0% 0%, 100% 0%, 100% 85%, 50% 100%, 0% 85%)",
-              }}
-            >
-              {/* Replace this background with your actual image */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-500">
-                {/* Add your image here: <img src="your-image.jpg" alt="Profile" className="w-full h-full object-cover" /> */}
-                <img
-                  src={require("./profile.jpg")}
-                  alt="Your Name"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              {/* Animated Overlay */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
-                animate={{ opacity: [0.3, 0.6, 0.3] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              />
-            </motion.div>
-
-            {/* Decorative Border Animation */}
-            <motion.div
-              className="absolute -inset-3 border-2 border-white/20"
+              className="absolute -inset-8 opacity-30 blur-2xl"
               animate={{
-                rotate: [0, 360],
-                borderColor: [
-                  "rgba(255,255,255,0.2)",
-                  "rgba(255,107,107,0.5)",
-                  "rgba(255,255,255,0.2)",
+                borderRadius: [
+                  "60% 40% 30% 70% / 60% 30% 70% 40%",
+                  "30% 60% 70% 40% / 50% 60% 30% 60%",
+                  "60% 40% 30% 70% / 60% 30% 70% 40%",
                 ],
+                rotate: [0, 180, 360],
               }}
-              transition={{ duration: 8, repeat: Infinity }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
               style={{
-                clipPath: "polygon(0% 0%, 100% 0%, 100% 85%, 50% 100%, 0% 85%)",
+                background: "linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)",
               }}
             />
 
-            {/* Floating Particles Around Image */}
-            {[...Array(6)].map((_, i) => (
+            {/* Main Image Container with Advanced Clip Path */}
+            <motion.div
+              className="relative w-full h-full overflow-hidden rounded-3xl"
+              animate={{
+                borderRadius: [
+                  "30% 70% 70% 30% / 30% 30% 70% 70%",
+                  "70% 30% 30% 70% / 70% 70% 30% 30%",
+                  "30% 70% 70% 30% / 30% 30% 70% 70%",
+                ],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              {/* Image with Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-500">
+                <img
+                  src={require("./profile.jpg")}
+                  alt="Your Name"
+                  className="w-full h-full object-cover mix-blend-overlay"
+                />
+              </div>
+
+              {/* Scan Line Effect */}
               <motion.div
-                key={i}
-                className="absolute w-2 h-2 bg-white rounded-full"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
+                className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/30 to-transparent"
                 animate={{
-                  y: [0, -30, 0],
-                  opacity: [0, 1, 0],
-                  scale: [0, 1.5, 0],
+                  y: ["-100%", "200%"],
                 }}
                 transition={{
                   duration: 3,
                   repeat: Infinity,
-                  delay: i * 0.5,
+                  ease: "linear",
+                  repeatDelay: 2,
+                }}
+                style={{
+                  height: "30%",
+                }}
+              />
+
+              {/* Glitch Effect Overlay */}
+              <motion.div
+                className="absolute inset-0"
+                animate={{
+                  opacity: [0, 0, 0, 0.8, 0, 0.8, 0],
+                  x: [0, -5, 5, -5, 0],
+                }}
+                transition={{
+                  duration: 0.3,
+                  repeat: Infinity,
+                  repeatDelay: 5,
+                }}
+                style={{
+                  background: "linear-gradient(90deg, #ff00ff 0%, #00ffff 100%)",
+                  mixBlendMode: "screen",
+                }}
+              />
+
+              {/* Gradient Overlay */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-purple-500/20"
+                animate={{ opacity: [0.4, 0.7, 0.4] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              />
+            </motion.div>
+
+            {/* Rotating Ring Border */}
+            <motion.div
+              className="absolute -inset-4 rounded-full border-4 border-transparent"
+              animate={{
+                rotate: [0, 360],
+                borderColor: [
+                  "rgba(255,107,107,0.5)",
+                  "rgba(78,205,196,0.5)",
+                  "rgba(149,225,211,0.5)",
+                  "rgba(255,107,107,0.5)",
+                ],
+              }}
+              transition={{
+                rotate: { duration: 8, repeat: Infinity, ease: "linear" },
+                borderColor: { duration: 4, repeat: Infinity }
+              }}
+              style={{
+                borderImage: "linear-gradient(45deg, transparent 30%, currentColor 50%, transparent 70%) 1",
+              }}
+            />
+
+            {/* Orbiting Particles */}
+            {[...Array(4)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-3 h-3 rounded-full"
+                style={{
+                  background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                  boxShadow: "0 0 20px rgba(102, 126, 234, 0.8)",
+                }}
+                animate={{
+                  x: [
+                    Math.cos((i * Math.PI) / 2) * 180,
+                    Math.cos((i * Math.PI) / 2 + Math.PI * 2) * 180,
+                  ],
+                  y: [
+                    Math.sin((i * Math.PI) / 2) * 180,
+                    Math.sin((i * Math.PI) / 2 + Math.PI * 2) * 180,
+                  ],
+                  scale: [1, 1.5, 1],
+                  opacity: [0.5, 1, 0.5],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  delay: i * 0.25,
+                  ease: "linear",
                 }}
               />
             ))}
 
-            {/* Text Label Below Image */}
+            {/* Holographic Corner Accents */}
             <motion.div
-              className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-xs uppercase tracking-widest text-gray-400 whitespace-nowrap"
+              className="absolute top-0 left-0 w-20 h-20 border-t-4 border-l-4 border-cyan-400"
+              animate={{
+                opacity: [0.3, 1, 0.3],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+            <motion.div
+              className="absolute bottom-0 right-0 w-20 h-20 border-b-4 border-r-4 border-pink-400"
+              animate={{
+                opacity: [0.3, 1, 0.3],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+            />
+
+            {/* Text Label with Glitch Effect */}
+            <motion.div
+              className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-xs uppercase tracking-widest whitespace-nowrap font-black"
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
               transition={{ delay: 1.5 }}
             >
-              CREATIVE DEVELOPER
+              <motion.span
+                className="relative"
+                animate={{
+                  textShadow: [
+                    "0 0 10px rgba(255,255,255,0.5)",
+                    "0 0 20px rgba(102,126,234,0.8), 0 0 30px rgba(118,75,162,0.6)",
+                    "0 0 10px rgba(255,255,255,0.5)",
+                  ],
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                CREATIVE DEVELOPER
+              </motion.span>
             </motion.div>
           </motion.div>
         </motion.div>
@@ -809,9 +864,9 @@ const HomePage = ({
       </section>
     </motion.div>
   );
-};
+});
 
-const WorkPage = ({ projects, setSelectedProject, setCursorSize }) => {
+const WorkPage = React.memo(({ projects, setSelectedProject, setCursorSize }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -861,9 +916,9 @@ const WorkPage = ({ projects, setSelectedProject, setCursorSize }) => {
       </div>
     </motion.div>
   );
-};
+});
 
-const AboutPage = ({ navigate }) => {
+const AboutPage = React.memo(({ navigate }) => {
   const skills = [
     "React",
     "Three.js",
@@ -952,9 +1007,9 @@ const AboutPage = ({ navigate }) => {
       </div>
     </motion.div>
   );
-};
+});
 
-const ServicesPage = ({ setShowContact }) => {
+const ServicesPage = React.memo(({ setShowContact }) => {
   const services = [
     {
       title: "UX/UI DESIGN",
@@ -1014,6 +1069,6 @@ const ServicesPage = ({ setShowContact }) => {
       </div>
     </motion.div>
   );
-};
+});
 
 export default AnimationPortfolio;
