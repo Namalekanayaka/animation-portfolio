@@ -431,94 +431,113 @@ const HomePage = React.memo(({
     >
       {/* Hero with Parallax */}
       <section className="min-h-screen relative flex items-center justify-between px-8 md:px-16 py-20 overflow-hidden">
-        {/* Optimized Starry Night Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-900/20 to-black">
-          {/* Reduced Stars - Only 20 total for performance */}
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={`star-${i}`}
-              className="absolute rounded-full bg-white"
-              style={{
-                width: Math.random() * 2 + 1,
-                height: Math.random() * 2 + 1,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                opacity: [0.2, 0.8, 0.2],
-                scale: [1, 1.5, 1],
-              }}
-              transition={{
-                duration: Math.random() * 3 + 2,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
-
-          {/* Shooting Stars - Reduced to 2 */}
-          {[...Array(2)].map((_, i) => (
-            <motion.div
-              key={`shooting-${i}`}
-              className="absolute h-0.5 bg-gradient-to-r from-transparent via-white to-transparent"
-              style={{
-                width: Math.random() * 100 + 80,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                rotate: -45,
-              }}
-              animate={{
-                x: [-1000, 1000],
-                opacity: [0, 1, 0],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                delay: i * 5,
-                repeatDelay: 10,
-              }}
-            />
-          ))}
-
-          {/* Nebula Clouds */}
+        {/* Background with Profile Image */}
+        <div className="absolute inset-0">
+          {/* Profile Image Background Layer */}
           <motion.div
-            className="absolute top-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"
-            animate={{
-              scale: [1, 1.3, 1],
-              x: [0, 50, 0],
-            }}
-            transition={{ duration: 20, repeat: Infinity }}
-          />
-          <motion.div
-            className="absolute bottom-1/3 left-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"
-            animate={{
-              scale: [1.2, 1, 1.2],
-              y: [0, -50, 0],
-            }}
-            transition={{ duration: 25, repeat: Infinity }}
-          />
+            className="absolute inset-0"
+            style={{ y: useTransform(smoothProgress, [0, 0.3], [0, 50]) }}
+          >
+            <div className="absolute inset-0 opacity-20">
+              <img
+                src={require("./profile.jpg")}
+                alt="Background"
+                className="w-full h-full object-cover blur-sm"
+              />
+            </div>
+            {/* Dark overlay for readability */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/85 to-black/90" />
+          </motion.div>
 
-          {/* Reduced Floating Particles - Only 8 */}
-          {[...Array(8)].map((_, i) => (
+          {/* Starry Night Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-purple-900/20 to-black/50">
+            {/* Reduced Stars - Only 20 total for performance */}
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={`star-${i}`}
+                className="absolute rounded-full bg-white"
+                style={{
+                  width: Math.random() * 2 + 1,
+                  height: Math.random() * 2 + 1,
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  opacity: [0.2, 0.8, 0.2],
+                  scale: [1, 1.5, 1],
+                }}
+                transition={{
+                  duration: Math.random() * 3 + 2,
+                  repeat: Infinity,
+                  delay: Math.random() * 2,
+                }}
+              />
+            ))}
+
+            {/* Shooting Stars - Reduced to 2 */}
+            {[...Array(2)].map((_, i) => (
+              <motion.div
+                key={`shooting-${i}`}
+                className="absolute h-0.5 bg-gradient-to-r from-transparent via-white to-transparent"
+                style={{
+                  width: Math.random() * 100 + 80,
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  rotate: -45,
+                }}
+                animate={{
+                  x: [-1000, 1000],
+                  opacity: [0, 1, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: i * 5,
+                  repeatDelay: 10,
+                }}
+              />
+            ))}
+
+            {/* Nebula Clouds */}
             <motion.div
-              key={`particle-${i}`}
-              className="absolute w-1 h-1 bg-cyan-400 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
+              className="absolute top-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"
               animate={{
-                y: [0, -100, 0],
-                x: [0, Math.random() * 50 - 25, 0],
-                opacity: [0, 1, 0],
+                scale: [1, 1.3, 1],
+                x: [0, 50, 0],
               }}
-              transition={{
-                duration: Math.random() * 5 + 5,
-                repeat: Infinity,
-                delay: Math.random() * 3,
-              }}
+              transition={{ duration: 20, repeat: Infinity }}
             />
-          ))}
+            <motion.div
+              className="absolute bottom-1/3 left-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"
+              animate={{
+                scale: [1.2, 1, 1.2],
+                y: [0, -50, 0],
+              }}
+              transition={{ duration: 25, repeat: Infinity }}
+            />
+
+            {/* Reduced Floating Particles - Only 8 */}
+            {[...Array(8)].map((_, i) => (
+              <motion.div
+                key={`particle-${i}`}
+                className="absolute w-1 h-1 bg-cyan-400 rounded-full"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  y: [0, -100, 0],
+                  x: [0, Math.random() * 50 - 25, 0],
+                  opacity: [0, 1, 0],
+                }}
+                transition={{
+                  duration: Math.random() * 5 + 5,
+                  repeat: Infinity,
+                  delay: Math.random() * 3,
+                }}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Hero Text Content */}
@@ -598,47 +617,35 @@ const HomePage = React.memo(({
           </motion.button>
         </motion.div>
 
-        {/* Advanced Profile Image Section with 3D Effects */}
+        {/* Large Profile Image Section - Similar to Reference */}
         <motion.div
-          className="relative w-80 h-[450px] hidden md:block perspective-1000"
+          className="relative w-[500px] h-[600px] hidden md:block"
           style={{ y: sculptureY }}
-          initial={{ opacity: 0, scale: 0.8, x: 100 }}
+          initial={{ opacity: 0, scale: 0.9, x: 100 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 1.2, delay: 0.5 }}
         >
           <motion.div
             className="relative w-full h-full"
-            whileHover={{
-              scale: 1.05,
-              rotateY: 5,
-              rotateX: -5,
-            }}
             animate={{
-              y: [0, -15, 0],
+              y: [0, -20, 0],
             }}
             transition={{
-              y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-              scale: { duration: 0.3 },
-              rotateY: { duration: 0.3 },
-              rotateX: { duration: 0.3 }
-            }}
-            style={{
-              transformStyle: "preserve-3d",
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+              repeatType: "reverse"
             }}
           >
-            {/* Morphing Blob Background */}
+            {/* Soft Glow Background */}
             <motion.div
-              className="absolute -inset-8 opacity-30 blur-2xl"
+              className="absolute -inset-8 opacity-30 blur-3xl rounded-full"
               animate={{
-                borderRadius: [
-                  "60% 40% 30% 70% / 60% 30% 70% 40%",
-                  "30% 60% 70% 40% / 50% 60% 30% 60%",
-                  "60% 40% 30% 70% / 60% 30% 70% 40%",
-                ],
-                rotate: [0, 180, 360],
+                scale: [1, 1.15, 1],
+                opacity: [0.25, 0.4, 0.25],
               }}
               transition={{
-                duration: 10,
+                duration: 4,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
@@ -647,166 +654,81 @@ const HomePage = React.memo(({
               }}
             />
 
-            {/* Main Image Container with Advanced Clip Path */}
+            {/* Main Image Container */}
+            <div className="relative w-full h-full overflow-hidden rounded-3xl shadow-2xl">
+              {/* High Quality Image */}
+              <img
+                src={require("./profile.jpg")}
+                alt="Your Name"
+                className="w-full h-full object-cover object-top"
+              />
+
+              {/* Subtle Bottom Gradient Fade */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+            </div>
+
+            {/* Elegant Border Glow */}
             <motion.div
-              className="relative w-full h-full overflow-hidden rounded-3xl"
+              className="absolute -inset-1 rounded-3xl pointer-events-none"
               animate={{
-                borderRadius: [
-                  "30% 70% 70% 30% / 30% 30% 70% 70%",
-                  "70% 30% 30% 70% / 70% 70% 30% 30%",
-                  "30% 70% 70% 30% / 30% 30% 70% 70%",
+                boxShadow: [
+                  "0 0 30px rgba(102, 126, 234, 0.3)",
+                  "0 0 50px rgba(118, 75, 162, 0.5)",
+                  "0 0 30px rgba(102, 126, 234, 0.3)",
                 ],
               }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              {/* Image with Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-500">
-                <img
-                  src={require("./profile.jpg")}
-                  alt="Your Name"
-                  className="w-full h-full object-cover mix-blend-overlay"
-                />
-              </div>
-
-              {/* Scan Line Effect */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/30 to-transparent"
-                animate={{
-                  y: ["-100%", "200%"],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "linear",
-                  repeatDelay: 2,
-                }}
-                style={{
-                  height: "30%",
-                }}
-              />
-
-              {/* Glitch Effect Overlay */}
-              <motion.div
-                className="absolute inset-0"
-                animate={{
-                  opacity: [0, 0, 0, 0.8, 0, 0.8, 0],
-                  x: [0, -5, 5, -5, 0],
-                }}
-                transition={{
-                  duration: 0.3,
-                  repeat: Infinity,
-                  repeatDelay: 5,
-                }}
-                style={{
-                  background: "linear-gradient(90deg, #ff00ff 0%, #00ffff 100%)",
-                  mixBlendMode: "screen",
-                }}
-              />
-
-              {/* Gradient Overlay */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-purple-500/20"
-                animate={{ opacity: [0.4, 0.7, 0.4] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              />
-            </motion.div>
-
-            {/* Rotating Ring Border */}
-            <motion.div
-              className="absolute -inset-4 rounded-full border-4 border-transparent"
-              animate={{
-                rotate: [0, 360],
-                borderColor: [
-                  "rgba(255,107,107,0.5)",
-                  "rgba(78,205,196,0.5)",
-                  "rgba(149,225,211,0.5)",
-                  "rgba(255,107,107,0.5)",
-                ],
-              }}
-              transition={{
-                rotate: { duration: 8, repeat: Infinity, ease: "linear" },
-                borderColor: { duration: 4, repeat: Infinity }
-              }}
+              transition={{ duration: 3, repeat: Infinity }}
               style={{
-                borderImage: "linear-gradient(45deg, transparent 30%, currentColor 50%, transparent 70%) 1",
+                background: "linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15))",
+                zIndex: -1,
               }}
             />
 
-            {/* Orbiting Particles */}
-            {[...Array(4)].map((_, i) => (
+            {/* Floating Light Particles */}
+            {[...Array(8)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute w-3 h-3 rounded-full"
+                className="absolute w-2 h-2 rounded-full"
                 style={{
-                  background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                  boxShadow: "0 0 20px rgba(102, 126, 234, 0.8)",
+                  background: "radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(102,126,234,0.5) 100%)",
+                  left: `${10 + (i % 4) * 25}%`,
+                  top: `${15 + Math.floor(i / 4) * 70}%`,
+                  boxShadow: "0 0 15px rgba(255,255,255,0.7)",
                 }}
                 animate={{
-                  x: [
-                    Math.cos((i * Math.PI) / 2) * 180,
-                    Math.cos((i * Math.PI) / 2 + Math.PI * 2) * 180,
-                  ],
-                  y: [
-                    Math.sin((i * Math.PI) / 2) * 180,
-                    Math.sin((i * Math.PI) / 2 + Math.PI * 2) * 180,
-                  ],
-                  scale: [1, 1.5, 1],
-                  opacity: [0.5, 1, 0.5],
+                  y: [0, -50, 0],
+                  opacity: [0.2, 1, 0.2],
+                  scale: [0.8, 1.4, 0.8],
                 }}
                 transition={{
-                  duration: 4,
+                  duration: 3 + i * 0.2,
                   repeat: Infinity,
-                  delay: i * 0.25,
-                  ease: "linear",
+                  delay: i * 0.3,
+                  ease: "easeInOut",
                 }}
               />
             ))}
 
-            {/* Holographic Corner Accents */}
+            {/* Corner Accent Lines - Top Left */}
             <motion.div
-              className="absolute top-0 left-0 w-20 h-20 border-t-4 border-l-4 border-cyan-400"
-              animate={{
-                opacity: [0.3, 1, 0.3],
-                scale: [1, 1.1, 1],
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            <motion.div
-              className="absolute bottom-0 right-0 w-20 h-20 border-b-4 border-r-4 border-pink-400"
-              animate={{
-                opacity: [0.3, 1, 0.3],
-                scale: [1, 1.1, 1],
-              }}
-              transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-            />
-
-            {/* Text Label with Glitch Effect */}
-            <motion.div
-              className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-xs uppercase tracking-widest whitespace-nowrap font-black"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{ delay: 1.5 }}
+              className="absolute top-0 left-0 w-20 h-20"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0.3, 0.7, 0.3] }}
+              transition={{ duration: 2.5, repeat: Infinity }}
             >
-              <motion.span
-                className="relative"
-                animate={{
-                  textShadow: [
-                    "0 0 10px rgba(255,255,255,0.5)",
-                    "0 0 20px rgba(102,126,234,0.8), 0 0 30px rgba(118,75,162,0.6)",
-                    "0 0 10px rgba(255,255,255,0.5)",
-                  ],
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                CREATIVE DEVELOPER
-              </motion.span>
+              <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-400 to-transparent" />
+              <div className="absolute top-0 left-0 w-0.5 h-full bg-gradient-to-b from-purple-400 to-transparent" />
+            </motion.div>
+
+            {/* Corner Accent Lines - Bottom Right */}
+            <motion.div
+              className="absolute bottom-0 right-0 w-20 h-20"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0.3, 0.7, 0.3] }}
+              transition={{ duration: 2.5, repeat: Infinity, delay: 1.25 }}
+            >
+              <div className="absolute bottom-0 right-0 w-full h-0.5 bg-gradient-to-l from-pink-400 to-transparent" />
+              <div className="absolute bottom-0 right-0 w-0.5 h-full bg-gradient-to-t from-pink-400 to-transparent" />
             </motion.div>
           </motion.div>
         </motion.div>
